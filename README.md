@@ -1,4 +1,4 @@
-# RNFDemo
+# React Native Music Demo
 
 ---
 
