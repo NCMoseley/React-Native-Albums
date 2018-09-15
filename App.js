@@ -1,17 +1,10 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Platform,
-  Image,
-  Text,
-  View,
-  ScrollView
-} from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import firebase from 'react-native-firebase';
 
 import Header from './src/components/Header';
 import AlbumList from './src/components/AlbumList';
-
+import LoginForm from './src/components/LoginForm';
 export default class App extends React.Component {
   constructor() {
     super();
@@ -20,12 +13,12 @@ export default class App extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     firebase
       .auth()
       .signInAnonymouslyAndRetrieveData()
       .then(user => {
-        console.log('firebase auth', user.isAnonymous);
+        console.log('RNFDemo user ->', user.isAnonymous);
       });
   }
 
@@ -34,6 +27,7 @@ export default class App extends React.Component {
       <ScrollView>
         <View>
           <Header headerText={'Albums'} />
+          <LoginForm />
           <AlbumList />
         </View>
       </ScrollView>
