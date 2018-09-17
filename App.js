@@ -1,34 +1,53 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import firebase from 'react-native-firebase';
 
 import Header from './src/components/Header';
 import AlbumList from './src/components/AlbumList';
 import LoginForm from './src/components/LoginForm';
-export default class App extends React.Component {
+import Button from './src/components/Button';
+import Spinner from './src/components/Spinner';
+class App extends Component {
   constructor() {
     super();
     this.state = {
-      // firebase things?
+      loggedIn: null
     };
   }
 
-  componentWillMount() {
-    firebase
-      .auth()
-      .signInAnonymouslyAndRetrieveData()
-      .then(user => {
-        console.log('RNFDemo user ->', user.isAnonymous);
-      });
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      console.log(user);
+      if (user) {
+        this.setState({ loggedIn: true });
+      } else {
+        this.setState({ loggedIn: false });
+      }
+    });
+  }
+
+  renderContent() {
+    switch (this.state.loggedIn) {
+      case true:
+        return (
+          <View>
+            <Button onPress={() => firebase.auth().signOut()}>Log Out</Button>
+            <AlbumList />
+          </View>
+        );
+      case false:
+        return <LoginForm />;
+      default:
+        return <Spinner size="large" />;
+    }
   }
 
   render() {
     return (
       <ScrollView>
         <View>
-          <Header headerText={'Albums'} />
-          <LoginForm />
-          <AlbumList />
+          <Header headerText={'Music for Sale'} />
+          {this.renderContent()}
         </View>
       </ScrollView>
     );
@@ -71,3 +90,5 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   }
 });
+
+export default App;

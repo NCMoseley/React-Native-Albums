@@ -4,6 +4,7 @@ import { Text, TouchableOpacity } from 'react-native';
 const styles = {
   buttonStyle: {
     flex: 1,
+    maxHeight: 43,
     alignSelf: 'stretch',
     backgroundColor: '#fff',
     borderRadius: 5,
