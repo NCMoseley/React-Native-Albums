@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
-import axios from 'axios';
+import firebase from 'react-native-firebase';
 
 import AlbumDetail from './AlbumDetail';
 
@@ -8,10 +8,16 @@ class AlbumList extends Component {
   state = { albums: [] };
 
   componentWillMount() {
-    axios
-      .get('https://rallycoding.herokuapp.com/api/music_albums')
-      .then(r => this.setState({ albums: r.data }));
+    const databaseRef = firebase.database().ref();
+    databaseRef.once('value').then(
+      function(snapshot) {
+        console.log(snapshot.val());
+        const data = snapshot.val();
+        this.setState({ albums: data });
+      }.bind(this)
+    );
   }
+
   renderAlbums() {
     return this.state.albums.map(album => (
       <AlbumDetail key={album.title} album={album} />
@@ -19,7 +25,6 @@ class AlbumList extends Component {
   }
 
   render() {
-    // console.log(this.state);
     return <ScrollView>{this.renderAlbums()}</ScrollView>;
   }
 }

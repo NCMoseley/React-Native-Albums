@@ -34,7 +34,10 @@ const AlbumDetail = ({ album }) => (
   <Card>
     <CardSection>
       <View style={styles.thumbnailContainerStyle}>
-        <Image style={styles.thumbnailStyle} source={{ uri: album.thumbnail_image }} />
+        <Image
+          style={styles.thumbnailStyle}
+          source={{ uri: album.thumbnail_image }}
+        />
       </View>
       <View style={styles.headerContentStyle}>
         <Text style={styles.headerTextStyle}>{album.title}</Text>
@@ -47,7 +50,9 @@ const AlbumDetail = ({ album }) => (
     </CardSection>
 
     <CardSection>
-      <Button onPress={() => Linking.openURL(album.url)}>Buy Now on Amazon</Button>
+      <Button onPress={() => Linking.openURL(album.url)}>
+        Buy Now on Amazon
+      </Button>
     </CardSection>
   </Card>
 );
