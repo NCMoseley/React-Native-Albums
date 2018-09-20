@@ -1,5 +1,4 @@
 {
-<<<<<<< ours
   "presets": [
     "babel-preset-react-native-stage-0/decorator-support"
   ],
@@ -10,7 +9,4 @@
       ]
     }
   }
-=======
-  "presets": ["module:metro-react-native-babel-preset"]
->>>>>>> theirs
 }
