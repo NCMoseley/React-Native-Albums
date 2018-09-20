@@ -23,8 +23,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "fbjs": "^0.8.17",
-    "react": "^16.3.2",
-    "react-native": "^0.55.3",
+    "react": "16.5.0",
+    "react-native": "0.57.0",
     "react-native-firebase": "^4.3.6"
   }
 }
